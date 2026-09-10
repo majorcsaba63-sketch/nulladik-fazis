@@ -268,6 +268,22 @@ h1{
 /* --- publikálás előtt kitöltendő (tisztázandó) link jelölése --- */
 .todo-link{color:var(--muted);font-style:italic}
 
+/* --- screenshot / kép helykitöltő slot — valós fájllal cserélendő ---
+   Használat: <div class="shot" data-label="..."><!-- [KITÖLTENDŐ] --></div>
+   Ha bekerül egy <img>, a felirat automatikusan eltűnik és a kép kitölti a keretet. */
+.shot{position:relative;margin:26px 0 8px;border:1px dashed rgba(23,18,38,.28);
+  border-radius:14px;background:var(--canvas-2);aspect-ratio:16/9;overflow:hidden;
+  display:flex;align-items:center;justify-content:center}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot::after{content:attr(data-label);position:absolute;left:0;right:0;padding:0 20px;
+  text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.05em;
+  line-height:1.5;color:var(--muted)}
+.shot:has(img)::after{display:none}
+.shot-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.shot-grid .shot{margin:26px 0 8px}
+.ref-card .shot{margin:16px 0 14px}
+@media (max-width:640px){.shot-grid{grid-template-columns:1fr}}
+
 @media (max-width:780px){
   .paths-grid-3,.paths-grid-2{grid-template-columns:1fr}
 }
